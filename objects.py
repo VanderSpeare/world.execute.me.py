@@ -1,338 +1,214 @@
-"""
-This program implements an application that implements an object
-for empty simulated world with no meaning or purpose.
-
-@author nyanye
-"""
+import sys, time, itertools, os, pytz, json, math
+import numpy as np
+from datetime import datetime
+from playsound import playsound 
 
 
-# Geometric objects
-class PointSet(object):
-    pass
-
-
-class Circle(object):
-    pass
-
-
-class SineWave(object):
-    pass
-
-
-class Sequence(object):
-    pass
-
-
-# Plants & Animal
-class Eggplant(object):
-    pass
-
-
-class Tomato(object):
-    pass
-
-
-class TabbyCat(object):
-    pass
-
-
-# Exception
-class IllegalArgumentException(Exception):
-    pass
-
-
-class Trapped(Exception):
-    pass
-
-def create(object):
-    return Lovable
-
-
-class Lovable(object):
-    class Attribute(object):
-        def to_attribute(self, *args):
-            return None
-
-        def is_erasable(self, *args):
-            pass
-
-    def __init__(self, *args):
-        self.can_see = None
-
-    def add_attribute(self, *args):
-        pass
-
-    def add_action(self, *args):
-        pass
-
-    def add_feeling(self, *args):
-        pass
-
-    def escape(self, *args):
-        pass
-
-    def get_dimensions(self, *args):
-        return self.Attribute
-
-    def get_circumference(self, *args):
-        return self.Attribute
+class World:
     
-    def get_tangent(self, *args):
-        return self.Attribute
-
-    def get_x_position(self, *args):
-        return None
-
-    def get_simulations_available(self, *args):
-        return 0
+    def play_audio(file_path):
+        playsound(file_path)
     
-    def get_num_simulations_needed(self, *args):
-        return 0
-
-    def get_sense_index(self, *args):
-        return -1   
-
-    def get_feeling_index(self, *args):
-        return -1
+    def slow_print(text:str,speed):
+            for karakter in text:
+                print(karakter,end="",flush=True)
+                time.sleep(speed)
+    def getPass(pswd):
+        passwd = ["ᛞ","ᚫ","ᛉ","ᚵ","ᛒ","ᛍ","ᛣ","ᛤ","ᛄ"]
+        if pswd == passwd:
+            print(" >>> LOGIN SUCCESS ")
+        else:
+            sys.exit()
     
-    def get_nutrients(self, *args):
-        return None
+    def layDown():
+        listx = ["ᛞ","ᛞᚫ","ᛞᚫᛉ","ᛞᚫᛉᚵ","ᛞᚫᛉᚵᛒ","ᛞᚫᛉᚵᛒᛍ","ᛞᚫᛉᚵᛒᛍᛣ","ᛞᚫᛉᚵᛒᛍᛣᛤ","ᛞᚫᛉᚵᛒᛍᛣᛤᛄ"]
+        count = 0
+        for c in listx:
+            if count != len(listx):
+                sys.stdout.write('\r' + c)
+                time.sleep(0.0001)
+                count +=1
+        sys.stdout.flush()
+        listy = ["ᛄ","  ᛄ","    ᛄ","       ᛄ","          ᛄ","                      ᛄ"]
+        count2 =0
+        for cc in itertools.cycle(listy):
+            if count2 == len(listy):
+                break
+            else:
+                sys.stdout.write('\r' + cc)
+                time.sleep(0.1)
+                count2 +=1
+                sys.stdout.flush()
+    def INITIALIZATION():
+        listx = ["     ██ 39%","     ███ 49%","     ████ 76%","     █████ 89%","     ██████ 100%","     ██████  INITIALIZATION","     ██████  INITIALIZATION","     ██████  INITIALIZATION","     ██████  INITIALIZATION","     ██████  INITIALIZATION","     ██████  INITIALIZATION","     ██████  INITIALIZATION"]
+        count = 0
+        for c in listx:
+            if count != len(listx):
+                sys.stdout.write('\r' + c)
+                time.sleep(0.1)
+                count +=1
+                sys.stdout.flush()
+    
+    def START_SIMULATION():
+        obj = """\033[32m \n________________________________________________________________________________________
+.    .    *  .   .  .   .  *     .  .        . .   .     .  *   .     .  .   .
+*  .    .    *  .     .         .    * .     .  *  .    .   .   *   . .    .
+. *      .   .    .  .     .  *      .      .        .     .-o--.   .    *  .
+.  .        .     .     .      .    .     *      *   .   :O o O :      .     .
+____   *   .    .      .   .           .  .   .      .    : O. Oo;    .   .
+`. ````.---...___      .      *    .      .       .   * . `-.O-'  .     * . .
+\_    ;   \`.-'```--..__.       .    .      * .     .       .     .        .
+,'_,-' _,-'             ``--._    .   *   .   .  .       .   *   .     .  .
+-'  ,-'                       `-._ *     .       .   *  .           .    .
+    ,-'            _,-._            ,`-. .    .   .     .      .     *    .   .
+    '--.     _ _.._`-.  `-._        |   `_   .      *  .    .   .     .  .    .
+        ;  ,' ' _  `._`._   `.      `,-''  `-.     .    .     .    .      .  .
+    ,-'   \    `;.   `. ;`   `._  _/\___     `.       .    *     .    . *
+    \      \ ,  `-'    )        `':_  ; \      `. . *     .        .    .    *
+    \    _; `       ,;               __;        `. .           .   .     . .
+    '-.;        __,  `   _,-'-.--'''  \-:        `.   *   .    .  .   *   .
+        )`-..---'   `---''              \ `.        . .   .  .       . .  .
+___________________________________________________________________________________________\033[0m"""
+        for karakter in obj:
+            print(karakter,end="",flush=True)
+        listx = ["     ██ 39%","     ███ 49%","     ████ 76%","     █████ 89%","     ██████ 100%","     ██████  GENERATE DATA","     ██████         GENERATE OBJECT","     ██████                      GENERATE FUNCTION","     ██████                         COLLECTIONG DATA","     ██████                      DOING WORK","     ██████               CONNECTING TO SERVER............","     ██████          CONNECTING TO SERVER DONE.............","     ██████  S T A R T    T H E     S I M U L A T I O N"]
+        count = 0
+        for c in listx:
+            if count != len(listx):
+                sys.stdout.write('\r' + c)
+                time.sleep(1)
+                count +=1
+                sys.stdout.flush()
         
-    def get_antioxidants(self, *args):
-        return None
-
-    def get_opinion_index(self, *args):
-        return None
-
-    def get_algebraic_expression(self, *args):
-        pass
-
-    def to_limit(self, *args):
-        return None
-
-    def to_proof(self, *args):
-        pass
-
-    def to_satisfaction(self, *args):
-        return None
-
-    def to_execution(self, *args):
-        pass
-
-    def toggle_gender(self, *args):
-        pass
-
-    def set_limit(self, *args):
-        pass
-
-    def set_proof(self, *args):
-        pass
-
-    def set_opinion(self, *args):
-        raise IllegalArgumentException
+    def set_of_point():
+        tz = pytz.timezone("Asia/Jakarta")
+        timeNow = datetime.now(tz=tz)
+        setpoint = datetime.strftime(timeNow, "%H:%M:%S")
+        return setpoint
+    
+    def prettyPrint(djson, ind=4):
+        print(json.dumps(djson, indent=ind, sort_keys=True))
+    
+    def GiveDimension(data):
+        arr = np.array(data)
+        print("\n>>> Dimension of set point ::: "+str(arr))
+    
+    def giveCIRCUMFERENCE(data):
+        luas = math.pi*(data*data)
+        keliling = 2*math.pi*data
+        print ("\n>>> CIRCUMFERENCE of set point ::: ",keliling)
+    
+    def loopInfinity():
+        for c in itertools.cycle(['|', '/', '-', '\\','   Then you can be my']):
+            sys.stdout.write('\r' +"\033[31m"+ c+"\033[0m")
+            sys.stdout.flush()
+            time.sleep(0.0001)
+    
+    def BlindMYVision():
+        blind = """\033[32m
         
-    def set_execution(self, *args):
-        pass
-  
-    def set_satisfaction(self, *args):
-        pass
 
-    def toggle_current(self, *args):
-        pass
-
-    def toggle_role_bdsm(self, *args):
-        pass
-
-    def look_for(self, *args):
-        pass
-
-    def learn_topic(self, *args):
-        pass
-
-    def take_exam_topic(self, *args):
-        pass
-
-    def get_memory(self, *args):
-        return self.Attribute()
+        88          88 88                      88  
+        88          88 ""                      88  
+        88          88                         88  
+        88,dPPYba,  88 88 8b,dPPYba,   ,adPPYb,88  
+        88P'    "8a 88 88 88P'   `"8a a8"    `Y88  
+        88       d8 88 88 88       88 8b       88  
+        88b,   ,a8" 88 88 88       88 "8a,   ,d88  
+        8Y"Ybbd8"'  88 88 88       88  `"8bbdP"Y8  
 
 
-    def request_execution(self, world):
-        world.execute()
 
-    def equals(self, lovable):
-        return True
+        \033[0m
+        """
+        print(blind)
     
-
-class World(object):
-    def __init__(self, *args):
-        pass
-
-    def lock_thing(self, *args):
-        pass
-
-    def unlock(self, *args):
-        pass
-
-    def add_thing(self, *args):
-        pass
-
-    def remove_thing(self, *args):
-        del args
-
-    def start_simulation(self, *args):
-        pass
-
-    def time_travel_for_two(self, *args):
-        pass
-
-    def unite(self, *args):
-        pass
+    def GiveAllSumulation():
+        return "Dummy"
     
-    def run_execution(self, *args):
-        pass
-
-    def announce(self, *args):
-        pass
+    def run_Exec(me):
+        if me == "happy":
+            return "\n-- S U C C E S S    E X E C U T E --"
     
-    def execute(self, *args):
-        pass
-
-    def procreate(self, *args):
-        pass
-
-    def make_high(self, *args):
-        pass  
-
-    def get_god(self, *args):
-        return Lovable()
-
-    def get_thing_index(self, *args):
-        pass
-
-    def is_executable_by(self, *args):
-        return True
+    def TRAPPED():
+        for c in itertools.cycle(['💀   Though we are trapped', '   Though we are trapped']):
+            sys.stdout.write('\r' +"\033[31m"+ c+"\033[0m")
+            sys.stdout.flush()
+            time.sleep(0.0001)
     
+    def IMTRAPPED():
+        for c in itertools.cycle(['❤️   Though IM trapped', '   Though IM trapped']):
+            sys.stdout.write('\r' +"\033[31m"+ c+"\033[0m")
+            sys.stdout.flush()
+            time.sleep(0.0001)
+    
+    def GET_NUTRIENTS():
+        return "-- S U C C E S S  G E T  N U T R I E N T S --"
+    
+    def GET_ANTIOXIDANTS():
+        return "-- S U C C E S S  A N T I O X I D A N T S --"
+    
+    def GET_ENJOYMENT():
+        return "-- S U C C E S S  E N J O Y M E N T --"
+    
+    def GOD_EXISTENCE():
+        return "-- S U C C E S S  U P G R A D E  T O  [G O D] --"
+    
+    def GetTimeNow():
+        tz = pytz.timezone("Asia/Jakarta")
+        timeNow = datetime.now(tz=tz)
+        localtimes = datetime.strftime(timeNow, "%a %I.%M ")
+        return localtimes
+    
+    def EnterTrance(target):
+        os.system(f"python -m trace --listfuncs {target}")
+    
+    def LeftSystem():
+        sys.exit("LEFT THE SIMULATION")
 
-def sing():
-    song = \
-    """
-    Switch on the power line
-    Remember to put on
-    PROTECTION
-    Lay down your pieces
-    And let's begin
-    OBJECT CREATION
-    Fill in my data, parameters
-    INITIALISATION
-    Setup, a new world
-    And let's begin
-    THE SIMULATION
-    If I'm a set of points
-    Then I will give you my dimension
-    If I'm a circle
-    Then I will give you my circumference
-    If I'm a sine wave
-    Then you can sit on all my tangents
-    If I approach infinity, then you can be
-    MY LIMITATIONS
+    def ChallengingYourGod():
+        for c in itertools.cycle(['|', '/', '-', '\\','   Challenging your god']):
+            sys.stdout.write('\r' +"\033[31m"+ c+"\033[0m")
+            sys.stdout.flush()
+            time.sleep(0.0001)
+    
+    def FxingIllegalArgument():
+        for c in itertools.cycle(
+            ["ᛞ Fixing Illegal Arguments","ᛞᚫ Fixing Illegal Arguments","ᛞᚫᛉ Fixing Illegal Arguments","ᛞᚫᛉᚵ Fixing Illegal Arguments","ᛞᚫᛉᚵᛒ Fixing Illegal Arguments","ᛞᚫᛉᚵᛒᛍ Fixing Illegal Arguments","ᛞᚫᛉᚵᛒᛍᛣ Fixing Illegal Arguments","ᛞᚫᛉᚵᛒᛍᛣᛤ Fixing Illegal Arguments","ᛞᚫᛉᚵᛒᛍᛣᛤᛄ Fixing Illegal Arguments"]
+            ):
+            sys.stdout.write('\r' +"\033[31m"+ c+"\033[0m")
+            sys.stdout.flush()
+            time.sleep(0.0001)
+    
+    def run_execution():
+        print("\n")
+        exec("print('SYSTEM TRY ::: EXECUTION!!')")
+    
+    def announce(num,say):
+        datas = {"number":num,"says":say}
+        print(json.dumps(datas, indent=4, sort_keys=True))
 
-    Switch my current
-    To AC to DC
-    And then blind my vision
-    So dizzy, so dizzy
-    Oh, we can travel
-    From A.D to B.C
-    And we can unite
-    So deeply, so deeply
+    def Execute(me):
+        if me != "":
+            fire = """
+ _ _ _  _  ___ _    __    _____ _____ __  _ _  ___  ___   _ _   _  ___ _   
+| | | |/ \| o \ |  |  \  | __\ V / __/ _|| | ||_ _|| __| //| \_/ || __|\\  
+| V V ( o )   / |_ | o ) | _| ) (| _( (_ | U | | | | _| || | \_/ || _|  |()
+ \_n_/ \_/|_|\\___||__() |___/_n_\___\__||___| |_| |___||| |_| |_||___| |()
+                                                         \\            //V 
 
-    If I can
-    If I can, give you all
-    THE SIMULATIONS
-    Then I can
-    Then I can, be your only
-    SATISFACTION
-    If I can make you happy
-    Then I'll run the
-    EXECUTION
-    Though we are trapped
-    In this strange, strange
-    SIMULATION
-
-    If I'm an eggplant
-    Then I will give you my
-    NUTRIENTS
-    If I'm a tomato
-    Then I'll give you
-    ANTIOXIDANTS
-    If I'm a tabby cat
-    Then I will purr for your
-    ENJOYMENT
-    If I'm the only god
-    Then your the proof of my
-    EXISTENCE
-
-    Switch my gender
-    To F to M
-    And then do whatever
-    From AM to PM
-    I will switch my role
-    To S to M
-    So we can enter
-    The trance, the trance
-
-    If I can
-    If I can, feel your
-    VIBRATIONS
-    Then I can
-    Then I can, finally be
-    COMPLETION
-    Though you have left
-    You have left
-    You have left
-    You have left
-    You have left
-    You have left me in
-    ISOLATION
-
-    If I can
-    If I can, erase all the pointless
-    FRAGMENTS
-    Then maybe
-    Then maybe, you won't leave me so
-    DISHEARTENED
-    Challenging your god
-    You have made some
-    ILLEGAL ARGUMENTS
-
-    Execution, Execution, Execution, Execution
-    Execution, Execution, Execution, Execution
-    Execution, Execution, Execution, Execution
-    Ein, Dos, Trois
-    Ne, Fem, Liu
-    EXECUTION
-
-    If I can
-    If I can, give you all the
-    EXECUTION
-    Then I can
-    Then I can, be your only
-    EXECUTION
-    If I can, have you back
-    Then I will run the
-    EXECUTION
-    Though we are trapped
-    We are trapped ah
-
-    I've studied
-    I've studied how to properly
-    LO-O-OVE
-    Question me
-    Question me I can answer all
-    LO-O-OVE
-    I know the algebraic expression of
-    LO-O-OVE
-    Though you are free
-    I am trapped, trapped in
-    LO-O-OVE
-    """
-    print(song)
+CREATE BY ALIF BUDIMAN
+MUSIC BY MILI 'WORLD.EXECUTE(ME);'
+                                                                         
+.    .    *  .   .  .   .  *     .  .        . .   .     .  *   .     .  .   .
+*  .    .    *  .     .         .    * .     .  *  .    .   .   *   . .    .
+.    .    *  .   .  .   .  *     .  .        . .   .     .  *   .     .  .   .
+*  .    .    *  .     .         .    * .     .  *  .    .   .   *   . .    .
+.    .    *  .   .  .   .  *     .  .        . .   .     .  *   .     .  .   .
+*  .    .    *  .     .         .    * .     .  *  .    .   .   *   . .    .
+EXECUTION!!
+""" 
+            for karakter in fire:
+                print(karakter,end="",flush=True)
+                time.sleep(0.001)
+        
